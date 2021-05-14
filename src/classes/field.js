@@ -24,6 +24,7 @@ class Field {
      */
     constructor(selector, options) {
         if (!selector) throw new Error('Selector should be specified');
+        options = options || {};
         this.width  = options && Number(options.width) || 1000;
         this.height = options && Number(options.height) || 400;
         
@@ -41,7 +42,7 @@ class Field {
         this.startSet = options.particles;
         this.containerClassName = typeof options.className === 'string' ? options.className : 'bubbles-field-plugin';
         this.drawSparkles = options.drawSparkles;
-        this.bubbleStyle = typeof options.bubbleStyle === 'string' ? options.bubbleStyle : 'default';
+        this.bubbleStyle = typeof options.particleStyle === 'string' ? options.particleStyle : 'default';
     }
 
     /**
@@ -489,7 +490,7 @@ const findEmptyPosition = (radius, field)  => {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    window.BubblesFieldPlugin = Field;
+    window.FloatingParticlesPlugin = Field;
 }
 
 export default Field;

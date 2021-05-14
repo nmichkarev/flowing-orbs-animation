@@ -2,8 +2,8 @@ import './scss/index.scss';
 import Field from './classes/field';
 
 const ballsopts = [{ radius: 20, color: 'red', count: 10 }, { radius: 20, color: 'blue', count: 5 }, , { radius: 40, color: [0, 128, 0], count: 3 }];
-const bubblesField = new Field('bubbles', { mode: 'gas', particles: ballsopts, overlay: false, drawSparkles: false, bubbleStyle: 'vibrating' });
-
+//const bubblesField = new Field('bubbles', { mode: 'gas', particles: ballsopts, overlay: false, drawSparkles: false, particleStyle: 'vibrating' });
+const bubblesField = new Field('bubbles');
 /* const bubblesField = new Field('bubbles', { 
     height: 200,
     width: 500,
@@ -28,5 +28,5 @@ bubblesField.init();
     - width: number (default: 1000)
     - height: number (default: 400)
     - drawSparkles: (true|false)
-    - bubbleStyle: ('filled'|'vibrating'|'stroked'|'gradient'|'satellite')
+    - particleStyle: ('filled'|'vibrating'|'stroked'|'gradient'|'satellite')
 */
