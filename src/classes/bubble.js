@@ -36,7 +36,7 @@ class Bubble {
         const Strategy = style in strategies ? strategies[style] : strategies.default;
         /** @type{CanvasRenderingContext2D} */
         this.ctx    = canvasContext;
-        this.radius = radius || 20;
+        this.radius = Number.isInteger(radius) ? Math.abs(radius) : 20;
         this.position  = position;
         this.mode = mode;
         this.direction = isNaN(direction) ? (Math.random() * (2 * Math.PI)) : direction;

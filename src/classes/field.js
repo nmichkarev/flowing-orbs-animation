@@ -57,12 +57,12 @@ class Field {
             this.createOverlayCanvas();
         }
 
-        /*
-        const b1 = new Bubble(this.canvasContext, this.bubbleStyle, 50, [60, 50], 0, null, this.mode, -2, this.drawSparkles);
+        
+/*         const b1 = new Bubble(this.canvasContext, this.bubbleStyle, 50, [60, 50], 0, null, this.mode, -2, this.drawSparkles);
         const b2 = new Bubble(this.canvasContext, this.bubbleStyle, 50, [300, 335], 3 / 2 * Math.PI , null, this.mode, -1, this.drawSparkles);
 
         this.bubbles.push(b1);
-        this.bubbles.push(b2); */
+        this.bubbles.push(b2);  */
 
         if (!startSet || (typeof startSet !== 'object')) {
             this.placeBubbles(20, 10);

@@ -13,6 +13,12 @@ class CircledDrawStrategy extends AbstractDrawStrategy {
         this.drawLineWidth = this.bubble.radius < 30 ? DRAW_LINE_WIDTH : DRAW_LINE_WIDTH_BIG;
         this.fillRadius    = this.bubble.radius - this.drawLineWidth;
         this.strokeRadius  = this.bubble.radius - this.drawLineWidth / 2;
+        if (this.fillRadius < 0) {
+            this.fillRadius = this.bubble.radius;
+        }
+        if (this.strokeRadius < 0) {
+            this.strokeRadius = this.bubble.radius;
+        }
     }
 
     draw() {

@@ -38,6 +38,10 @@ module.exports = (env, argv) => {
                     // Compiles Sass to CSS
                     "sass-loader",
                     ],
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    use: "file-loader"
                 }
             ]
         },
