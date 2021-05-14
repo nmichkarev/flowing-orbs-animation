@@ -1,0 +1,39 @@
+{
+  "name": "bubbles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/plugin.js",
+  "scripts": {
+    "start": "webpack serve --mode development --open --host 0.0.0.0",
+    "start-text": "webpack serve --mode development --open --host 0.0.0.0 --env template",
+    "build": "webpack --mode production",
+    "gen-doc": "./node_modules/.bin/jsdoc src -r"
+  },
+  "author": "nmichkarev@mail.ru",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-proposal-function-bind": "^7.12.13",
+    "@babel/preset-env": "^7.13.10",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.1.1",
+    "html-webpack-plugin": "^5.3.0",
+    "jsdoc": "~3.6.3",
+    "loader-utils": "^2.0.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-function-bind"
+    ]
+  }
+}
