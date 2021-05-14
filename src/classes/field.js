@@ -128,7 +128,6 @@ class Field {
     }
 
     createOverlayCanvas() {
-        console.log('createOverlay')
         const container = document.getElementById(this.selector);
         const canv = document.createElement('canvas');
 

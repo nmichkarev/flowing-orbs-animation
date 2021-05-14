@@ -1,7 +1,7 @@
 import AbstractDrawStrategy from './abstract';
 import DefaultDrawStrategy from './default';
 
-const RATTLE = 4;
+const RATTLE = 3;
 
 class VibrationsDrawStrategy extends AbstractDrawStrategy {
 
