@@ -14,7 +14,7 @@ var options = {
     particles: balls
 };
 
-var particlesField = new FloatingParticlesPlugin('particles-holder', options);
+var particlesField = new FloatingOrbsPlugin('particles-holder', options);
 particlesField.init();
 
 document.addEventListener("change", function(evt) {
@@ -41,6 +41,6 @@ document.addEventListener("change", function(evt) {
     }
 
     particlesField.destroy();
-    particlesField = new FloatingParticlesPlugin('particles-holder', options);
+    particlesField = new FloatingOrbsPlugin('particles-holder', options);
     particlesField.init();
 });

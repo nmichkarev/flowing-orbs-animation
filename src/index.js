@@ -3,15 +3,16 @@ import Field from './classes/field';
 
 const ballsopts = [{ radius: 20, color: 'red', count: 10 }, { radius: 20, color: 'blue', count: 5 }, , { radius: 40, color: [0, 128, 0], count: 3 }];
 //const bubblesField = new Field('bubbles', { mode: 'gas', particles: ballsopts, overlay: false, drawSparkles: false, particleStyle: 'vibrating' });
-const bubblesField = new Field('bubbles', {overlay: true, drawBorder: false});
-/* const bubblesField = new Field('bubbles', { 
-    height: 200,
-    width: 500,
+//const bubblesField = new Field('bubbles', {overlay: true, drawBorder: false});
+ const bubblesField = new Field('bubbles', { 
+    height: 400,
+    width: 1000,
     mode: 'gas', 
-    particles: { radius: 20, count: 6 }, 
+    particles: ballsopts, 
     overlay: true, 
-    drawSparkles: false, 
-bubbleStyle: 'filled' }); */
+    drawSparkles: false,
+    particleStyle: 'filled',
+bubbleStyle: 'filled' }); 
 
 
 window.bubblesField = bubblesField;

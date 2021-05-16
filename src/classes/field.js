@@ -512,7 +512,7 @@ const findEmptyPosition = (radius, field)  => {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    window.FloatingParticlesPlugin = Field;
+    window.FloatingOrbsPlugin = Field;
 }
 
 export default Field;
