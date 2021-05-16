@@ -1,11 +1,19 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 module.exports = (env, argv) => {
-    const entry = argv.mode === 'production' ? 
-        ['./src/classes/field.js', '@babel/polyfill'] :
-        ['./src/index.js', '@babel/polyfill'];
+/*     const jsEntry = argv.mode === 'production' ? 
+    ['./src/classes/field.js', '@babel/polyfill'] :
+    ['./src/index.js', '@babel/polyfill']; */
+    const jsEntry = argv.mode === 'production' ? 
+    './src/classes/field.js':
+    './src/index.js';
+    const cssEntry = env.template ? './src/scss/text-above.scss' : './src/scss/index.scss';
+    const entry = {
+        index: [jsEntry, cssEntry]
+    };
 
     return {
         entry,
@@ -14,7 +22,10 @@ module.exports = (env, argv) => {
             path: path.resolve(__dirname, 'dist')
         },
         plugins: [
-            new HTMLPlugin({ template: env.template ? './src/template.html' : './src/index.html' })
+            new HTMLPlugin({ template: env.template ? './src/template.html' : './src/index.html' }),
+            new MiniCssExtractPlugin({
+                filename: '[name].css',
+            }),
         ],
         module: {
             rules: [
@@ -22,21 +33,28 @@ module.exports = (env, argv) => {
                     test: /\.m?js$/,
                     exclude: /node_modules/,
                     use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                [
+                                    '@babel/preset-env',
+                                    { useBuiltIns: 'usage'}
+                                ]
+                            ]
+                        }
                     }
                 },
                 {
                     test: /\.s[ac]ss$/i,
                     use: [
-                    // Creates `style` nodes from JS strings
-                    "style-loader",
-                    // Translates CSS into CommonJS
-                    "css-loader",
-                    // Compiles Sass to CSS
-                    "sass-loader",
+                        // Creates `style` nodes from JS strings
+                        argv.mode !== 'production'
+                            ? 'style-loader'
+                            : MiniCssExtractPlugin.loader,
+                        // Translates CSS into CommonJS
+                        "css-loader",
+                        // Compiles Sass to CSS
+                        "sass-loader",
                     ],
                 },
                 {
@@ -45,6 +63,7 @@ module.exports = (env, argv) => {
                 }
             ]
         },
-        devtool: 'source-map'
+        devtool: 'source-map',
+        target: ['web', 'es5']
     };
 };

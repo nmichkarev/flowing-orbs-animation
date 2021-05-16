@@ -1,46 +1,17 @@
-@import "./font.scss";
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .bubbles-field-plugin {
+    position: relative;
     canvas {
+        position: absolute;
+
+    }
+
+    &.with-border canvas {
         border: solid;
         border-width: 2px;
     }
-    canvas.bubbles-field-plugin-overlay-canvas {
+
+    &.with-border canvas.bubbles-field-plugin-overlay-canvas {
         border-color: rgba(255, 255, 255, 0.5);
     }
 }
 
-#bubbles{
-    position: relative;
-    canvas {
-        position: absolute;
-    }
-}
-
-.test-document {
-    font-family: mr_VlaShu;
-    .content-block {
-        height: 404px;
-        width: 100%;
-        position: relative;
-        .content {
-            z-index: 1;
-            position: fixed;
-            width: 1000px;
-            font-size: 42px;
-            display: table;
-            height: 400px;
-            .text-block {
-                vertical-align: middle;
-                display: table-cell;
-                text-align: center;
-            }
-        }
-    }
-}

@@ -30,6 +30,7 @@ particles | \*{ radius: **number**, color: **string**\|\[**number**, **number**,
 particleStyle | 'default'\|'filled'\|'stroked'\|'vibrating'\|'satellite' | 'default'
 drawSparkles | **true**\|**false** | **false**
 overlay | **true**\|**false** | **false**
+drawBorder | **true**\|**false** | **false**
 
 ### Options described
 1. width - sets the width of canvas. Should be a number.
@@ -58,7 +59,8 @@ overlay | **true**\|**false** | **false**
 ![Satellite style](https://github.com/nmichkarev/flowing-particless-animation/blob/readme-files/images/style-satellite.gif?raw=true)
 7. drawSparkles - true/false. If true, sparkles will be created after collisions
 ![Sparkles](https://github.com/nmichkarev/flowing-particless-animation/blob/readme-files/images/sparkles.gif?raw=true)
-8. overlay - true/false. If true, will be added translucent white canvas above to make it milder. So you can place it under some content(additional css styles can be required);
+8. overlay - true/false. If true, will be added translucent white canvas above to make it milder. So you can place it under some content(additional css styles can be required).
+9. drawBorder - true/false. If true, draws ordinary black border around canvas. 
 
 
 

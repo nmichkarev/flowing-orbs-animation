@@ -1,0 +1,30 @@
+@import "./index.scss";
+@import "./font.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.test-document {
+    font-family: mr_VlaShu;
+    .content-block {
+        height: 404px;
+        width: 100%;
+        position: relative;
+        .content {
+            z-index: 1;
+            position: fixed;
+            width: 1000px;
+            font-size: 42px;
+            display: table;
+            height: 400px;
+            .text-block {
+                vertical-align: middle;
+                display: table-cell;
+                text-align: center;
+            }
+        }
+    }
+}

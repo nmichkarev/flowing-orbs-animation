@@ -43,6 +43,7 @@ class Field {
         this.containerClassName = typeof options.className === 'string' ? options.className : 'bubbles-field-plugin';
         this.drawSparkles = options.drawSparkles;
         this.bubbleStyle = typeof options.particleStyle === 'string' ? options.particleStyle : 'default';
+        this.containerClassName += options.drawBorder ? ' with-border' : '';
     }
 
     /**
@@ -58,13 +59,6 @@ class Field {
             this.createOverlayCanvas();
         }
 
-        
-/*         const b1 = new Bubble(this.canvasContext, this.bubbleStyle, 50, [60, 50], 0, null, this.mode, -2, this.drawSparkles);
-        const b2 = new Bubble(this.canvasContext, this.bubbleStyle, 50, [300, 335], 3 / 2 * Math.PI , null, this.mode, -1, this.drawSparkles);
-
-        this.bubbles.push(b1);
-        this.bubbles.push(b2);  */
-
         if (!startSet || (typeof startSet !== 'object')) {
             this.placeBubbles(20, 10);
         } else {
@@ -72,7 +66,7 @@ class Field {
         }
 
         if (this.mode === SLOWING_MODE) {
-            setInterval(this.checkFieldForSleep, 5000);
+            this._checkFieldTimer = setInterval(this.checkFieldForSleep, 5000);
         }
 
         if (process.env.NODE_ENV === 'development') {
@@ -82,6 +76,14 @@ class Field {
 
         // Runs loop
         this.tick();
+    }
+
+    destroy() {
+        this.pause();
+        if (process.env.NODE_ENV === 'development') {
+            this.removeKeysBindings();
+        }
+        this.deleteCanvas();
     }
 
     addResizeListener() {
@@ -122,10 +124,18 @@ class Field {
         canv.setAttribute('height', String(this.height));
         canv.setAttribute('class', 'bubbles-canvas');
 
+        this.container = container;
         this.canvas = canv;
         this.canvasContext = canv.getContext('2d');
 
         container.insertAdjacentElement('afterbegin', canv);
+    }
+
+    deleteCanvas() {
+        this.container.removeChild(this.canvas);
+        if (this.overlayCanvas) {
+            this.container.removeChild(this.overlayCanvas);
+        }
     }
 
     createOverlayCanvas() {
@@ -141,24 +151,36 @@ class Field {
         context.fillStyle = 'rgba(255, 255, 255, 0.5)';
         context.fillRect(0, 0, this.width, this.height);
         container.insertAdjacentElement('beforeend', canv);
+        this.overlayCanvas = canv;
+    }
+
+    _keydownHandler = event => {
+        if (event.code === 'Space') {
+            event.preventDefault();
+        }
+    }
+
+    _keyupHandler = event => {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            if (this.paused) { this.play() } else { this.pause() }
+        }
     }
 
     attachKeysBindings() {
-        document.addEventListener('keydown', event => {
-            if (event.code === 'Space') {
-                event.preventDefault();
-            }
-        });
-        document.addEventListener('keyup', event => {
-            if (event.code === 'Space') {
-                event.preventDefault();
-                if (this.paused) { this.play() } else { this.pause() }
-            }
-        });
+        document.addEventListener('keydown', this._keydownHandler);
+        document.addEventListener('keyup', this._keyupHandler);
+    }
+
+    removeKeysBindings() {
+        document.removeEventListener('keydown', this._keydownHandler);
+        document.removeEventListener('keyup', this._keyupHandler);
+
     }
 
     pause() {
         clearTimeout(this.clockId);
+        clearTimeout(this._checkFieldTimer);
         this.paused = true;
     }
 
@@ -370,7 +392,7 @@ class Field {
         fbubble.touch(deflection);
         sbubble.touch(deflection + Math.PI);
 
-        //this.__drawDeflectionAngle(fbubble, sbubble, deflection);
+        //this._drawDeflectionAngle(fbubble, sbubble, deflection);
 
         fbubble.direction = newdeflectionf;
         sbubble.direction = newdeflections;
@@ -416,7 +438,7 @@ class Field {
      * @param {Bubble} sbubble 
      * @param {number} deflection
      */
-    __drawDeflectionAngle(fbubble, sbubble, deflection) {
+    _drawDeflectionAngle(fbubble, sbubble, deflection) {
         const ctx = this.canvasContext;
         const radsum = fbubble.radius + sbubble.radius;
         const x = fbubble.x + radsum * Math.cos(deflection);
