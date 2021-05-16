@@ -1,4 +1,4 @@
-![Plugin Logo](https://github.com/nmichkarev/flowing-particless-animation/blob/readme-files/images/title.png.png?raw=true)
+![Plugin Logo](https://github.com/nmichkarev/flowing-orbs-animation/blob/readme-files/images/title.png?raw=true)
 # flowing-orbs-animation plugin
 Canvas animation representing movement of colliding orbs. 
 ## Installation
@@ -9,12 +9,12 @@ Copy /dist/plugin.js to js-directory on your site, insert
 ```
 <script src="plugin.js"></script>
 ```
-in your html. It will add a new option FloatingParticlesPlugin to your window object.
+in your html. It will add a new option FloatingOrbsPlugin to your window object.
 
 ## Usage
 Create a div element in your markup. Define an id attribure for it. Then create a bubbles field using constructor.
 ```
-const orbsField = new FloatingParticlesPlugin('div-id', options);
+const orbsField = new FloatingOrbsPlugin('div-id', options);
 orbsField.init();
 ```
 ![Example of run](https://github.com/nmichkarev/flowing-particless-animation/blob/readme-files/images/initial.gif?raw=true)
