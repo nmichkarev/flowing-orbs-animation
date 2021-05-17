@@ -10,7 +10,7 @@ class SatelliteDrawStrategy extends AbstractDrawStrategy {
         super(...args);
         const bubbleRadius = this.bubble.radius;
         this.radius = Math.floor(bubbleRadius / 10);
-        if (this.radius < 1) this.radius = 1;
+        if (this.radius < 2) this.radius = 2;
         this.angle = getRandomArbitrary(0, PI2);
         this.direction = Math.round(Math.random()) === 0 ? -1 : 1;
     }

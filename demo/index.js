@@ -7,7 +7,7 @@ var options = {
     width: 700,
     height: 300,
     mode: 'default',
-    bubbleStyle: 'default',
+    particleStyle: 'default',
     drawSparkles: false,
     overlay: false,
     drawBorder: true,
@@ -15,7 +15,10 @@ var options = {
 };
 
 var particlesField = new FloatingOrbsPlugin('particles-holder', options);
+var objectOutDiv = document.getElementById("pretty-options");
+
 particlesField.init();
+objectOutDiv.innerHTML = JSON.stringify(options, undefined, 4);
 
 document.addEventListener("change", function(evt) {
     var target = evt.target;
@@ -43,4 +46,5 @@ document.addEventListener("change", function(evt) {
     particlesField.destroy();
     particlesField = new FloatingOrbsPlugin('particles-holder', options);
     particlesField.init();
+    objectOutDiv.innerHTML = JSON.stringify(options, undefined, 4);
 });

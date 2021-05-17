@@ -34,12 +34,10 @@ class Sparkle {
         ctx.beginPath();
         ctx.moveTo(x, y);
         ctx.lineTo(x + length * cosdir, y + length * sindir);
-        ctx.strokeStyle = `rgba(255, ${255 - power * 255}, 0, ${power})`;
+        ctx.strokeStyle = `rgba(255, ${Math.floor(255 - power * 255)}, 0, ${power})`;
         //ctx.strokeStyle = `rgba(0, 173, 255, ${power})`;
         ctx.stroke();
-        
         this.move();
-        //console.log('Draw sparkle', 255 - power * COLOR_STEP)
     }
 }
 

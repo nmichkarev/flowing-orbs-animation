@@ -9,8 +9,9 @@ const ballsopts = [{ radius: 20, color: 'red', count: 10 }, { radius: 20, color:
     width: 1000,
     mode: 'gas', 
     particles: ballsopts, 
-    overlay: true, 
-    drawSparkles: false,
+    overlay: true,
+    drawBorder: true,
+    drawSparkles: true,
     particleStyle: 'filled',
 bubbleStyle: 'filled' }); 
 

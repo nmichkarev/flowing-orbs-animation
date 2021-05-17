@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
         index: [jsEntry, cssEntry]
     };
 
-    return {
+    const config = {
         entry,
         output: {
             filename: argv.mode === 'production' ? 'plugin.js' : 'bundle.js',
@@ -64,6 +64,11 @@ module.exports = (env, argv) => {
             ]
         },
         devtool: 'source-map',
-        target: ['web', 'es5']
     };
+
+    if (argv.mode === 'production') {
+        config.target = ['web', 'es5'];
+    }
+
+    return config;
 };
