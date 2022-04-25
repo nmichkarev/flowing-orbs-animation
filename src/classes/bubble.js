@@ -49,7 +49,6 @@ class Bubble {
         this.color = color || new RGB(getRandomInt(0, 266), getRandomInt(0, 266), getRandomInt(0, 266));
         this.drawSparkles = drawSparkles || false;
         /** @type{Sparkle[]} */
-        //this.sparkles = new Set();
         this.sparkles = [];
         this.drawStrategy = new Strategy(this.ctx, this);
     }
@@ -157,12 +156,6 @@ class Bubble {
 
         this.drawStrategy.draw();
 
-
-        //this.drawPostTouch2();
-        //this.drawPostTouchBezier();
-        //this.drawVelocity();
-        //this.drawInfo();
-        //this.drawGradient();
     }
 
     processSparkles() {
@@ -173,7 +166,6 @@ class Bubble {
         this.ctx.lineCap = 'round';
 
         this.sparkles.forEach(sparkle => {
-            //debugger;
             if (sparkle && sparkle.power <= 0){
                 //this.sparkles.delete(sparkle);
             } else {
@@ -247,7 +239,6 @@ class Bubble {
             const cpy1 = this.y + (point.delta < 0 ? point.topy : point.bottomy);
             const cpx2 = this.x + (point.delta < 0 ? points[i-1].bottomx : points[i-1].topx);
             const cpy2 = this.y + (point.delta < 0 ? points[i-1].bottomy : points[i-1].topy);
-            //ctx.lineTo(this.x + delta * point.cosangle, this.y + delta * point.sinangle);
             ctx.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, tox, toy);
             ctx.fillStyle = 'red';
             ctx.fillRect(cpx1, cpy1, 1, 1);
@@ -258,14 +249,12 @@ class Bubble {
 
         ctx.closePath();
         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 1)`;
-        //ctx.fill();
         
         ctx.stroke();
     }
 
     drawRattlingCircleZigzag() {
-        const { ctx, radius, fillRadius, strokeRadius, cooldown, color } = this;
-        //const { points } = this;
+        const { ctx, fillRadius, strokeRadius, cooldown, color } = this;
         const points = this.getRandomCirclePoints();
 
         ctx.beginPath();
@@ -372,15 +361,9 @@ class Bubble {
 
     drawPostTouch2() {
         if (this.cooldown <= 0) return;
-        const { ctx, prevDirection, radius, touchAngle } = this;
+        const { ctx, radius, touchAngle } = this;
 
         this.cooldown -= 0.01;
-        const gradEndX = this.x + Math.cos(this.touchAngle) * radius;
-        const gradEndY = this.y + Math.sin(this.touchAngle) * radius;
-        let gradient  /*= ctx.createLinearGradient(this.x, this.y, gradEndX, gradEndY);
-        
-        gradient.addColorStop(0, 'white');
-        gradient.addColorStop(1, 'rgba(195, 0, 0, 1)'); */
 
 
         for (let i =-1; i < 1; i += 0.02) {
@@ -391,12 +374,8 @@ class Bubble {
             ctx.moveTo(this.x, this.y);
             ctx.lineTo(this.x + radius * cosTouch, this.y + radius * sinTouch);
             ctx.strokeStyle = `rgba(195, 0, 0, ${(1-Math.abs(i))*this.cooldown})`;
-/*             gradient = ctx.createLinearGradient(this.x, this.y, gradEndX, gradEndY);
-            gradient.addColorStop(0, 'white');
-            gradient.addColorStop(1, `rgba(195, 0, 0, ${1-Math.abs(i)})`);
-            ctx.strokeStyle = gradient; */
+
             ctx.stroke();
-            //console.log(this.x, this.y, radius * cosTouch, radius * sinTouch)
         }
         ctx.strokeStyle = 'black';
     }

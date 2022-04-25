@@ -397,7 +397,6 @@ class Field {
         fbubble.touch(deflection);
         sbubble.touch(deflection + Math.PI);
 
-        //this._drawDeflectionAngle(fbubble, sbubble, deflection);
 
         fbubble.direction = newdeflectionf;
         sbubble.direction = newdeflections;
@@ -456,7 +455,6 @@ class Field {
         ctx.stroke();
         ctx.fillText('1', fbubble.x, fbubble.y);
         ctx.fillText('2', x, y);
-        console.log(getAngleQuarter(deflection), radToDeg(deflection))
     }
 
     /**

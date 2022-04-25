@@ -8,10 +8,6 @@ class RadialGradientDrawStrategy extends AbstractDrawStrategy {
         const { ctx, bubble } = this;
         const { radius, cooldown,touchAngle } = bubble;
 
-/*         if (cooldown <= 0) { 
-            DefaultDrawStrategy.prototype.draw.call(this);
-            return;
-        } */
         FilledDrawStrategy.prototype.draw.call(this);
         if (cooldown <= 0) return;
 
@@ -24,12 +20,10 @@ class RadialGradientDrawStrategy extends AbstractDrawStrategy {
         const radPlus10Percent = radius + Math.abs(radius / 10); 
         const gradient1 = ctx.createRadialGradient(radTouchxsec, radTouchysec, radius/2, radTouchx, radTouchy, radius+radPlus10Percent);
 
-        //gradient1.addColorStop(0, 'red');
         gradient1.addColorStop(0, `rgba(195, 0, 0, ${cooldown})`);
         gradient1.addColorStop(1, 'white');
         const gradient2 = ctx.createRadialGradient(radTouchxsec, radTouchysec, radius/2, radTouchx, radTouchy, radius+radPlus10Percent);
 
-        //gradient2.addColorStop(0, 'red');
         gradient2.addColorStop(0, `rgba(195, 0, 0, ${cooldown})`);
         gradient2.addColorStop(1, 'white');
 
