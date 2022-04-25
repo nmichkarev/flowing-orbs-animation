@@ -1,5 +1,5 @@
 ![Plugin Logo](https://github.com/nmichkarev/flowing-orbs-animation/blob/readme-files/images/title.png?raw=true)
-# flowing-orbs-animation plugin
+# floating-orbs-animation plugin
 Canvas animation representing movement of colliding orbs. 
 ## Installation
 ```
@@ -8,13 +8,17 @@ npm run build
 Copy /dist/plugin.js to js-directory on your site, insert
 ```
 <script src="plugin.js"></script>
+<link href="plugin.css" rel="stylesheet" type="text/css" />
 ```
 in your html. It will add a new option FloatingOrbsPlugin to your window object.
 
 ## Usage
-Create a div element in your markup. Define an id attribure for it. Then create a bubbles field using constructor.
+Create a div element in your markup. Define an id attribure for it. Then create a bubbles field using constructor:
 ```
 const orbsField = new FloatingOrbsPlugin('div-id', options);
+```
+And initialize the field:
+```
 orbsField.init();
 ```
 ![Example of run](https://github.com/nmichkarev/flowing-particless-animation/blob/readme-files/images/initial.gif?raw=true)
@@ -45,8 +49,15 @@ drawBorder | **true**\|**false** | **false**
 ![Slowing movement mode](https://github.com/nmichkarev/flowing-particless-animation/blob/readme-files/images/mode-slowing.gif?raw=true)
 5. particles - defines parameters of particles. One or more sets can be pulled. If here's only one set, object can be passed. Every set consists of
 - count: number of particles
-- radius: radius of particles
+- radius: radius of particles in pixels
 - color: optional. Can be a string of 'red', 'blue', 'green' or array of 3 numbers, representing color in rgb notation [255, 255, 255] for white, for example. Makes sense for 'filled' and 'stroked' particleStyle options.
+Examples:
+```
+{ count: 10, radius: 15, color: 'red' }
+```
+```
+[{ count: 5, radius: 20, color: 'blue' }, { count: 4, radius: 30, color: [0, 0, 255] }]
+```
 6. particleStyle
 - 'default': draws simple line as in examples above.
 - 'filled': particles are filled. If color is not passed in parameters, the random color gets created for each particle.

@@ -17,7 +17,9 @@ class VibrationsDrawStrategy extends AbstractDrawStrategy {
         const points = bubble.getRandomCirclePoints();
 
         ctx.beginPath();
-        ctx.strokeStyle = 'black';
+        //ctx.strokeStyle = 'black';
+        ctx.strokeStyle = `rgb(${bubble.color.r}, ${bubble.color.g}, ${bubble.color.b})`;
+
         ctx.lineWidth = 1;
         
         let startx = bubble.x + (radius + points[0].delta * RATTLE * cooldown) * points[0].cosangle;

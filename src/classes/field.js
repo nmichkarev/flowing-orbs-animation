@@ -32,8 +32,9 @@ class Field {
         /** @type{Bubble[]} */
         this.bubbles = [];
         this.counter = 0;
-        this.tick     = ::this.tick;
-        this.pause    = ::this.pause;
+        this.tick    = ::this.tick;
+        this.pause   = ::this.pause;
+        this.checkFieldForSleep = ::this.checkFieldForSleep;
         //this.detectedCollisions = {};
         this.paused = false;
         this.mode = options ? (options.mode && USER_INPUT_MODE[options.mode] || DEFAULT_MODE) : DEFAULT_MODE;
@@ -51,7 +52,7 @@ class Field {
      */
     init() {
         const { startSet } = this;
-        const setPull = set => { if (set.radius && set.count && set.color) {this.placeBubbles(set.count, set.radius, set.color)} };
+        const setPull = set => { if (set.radius && set.count) {this.placeBubbles(set.count, set.radius, set.color)} };
 
         this.createCanvas();
 
@@ -180,7 +181,7 @@ class Field {
 
     pause() {
         clearTimeout(this.clockId);
-        clearTimeout(this._checkFieldTimer);
+        clearInterval(this._checkFieldTimer);
         this.paused = true;
     }
 
@@ -250,7 +251,11 @@ class Field {
         const sum = this.bubbles.reduce((s, bubble) => s + bubble.velocity, 0);
 
         if (sum < this.bubbles.length * 0.1) {
-            this.bubbles.forEach(bubble => bubble.velocity = 0.5);
+            const half = Math.floor((this.bubbles.length / 2)) || 1;
+
+            for (let i = 0; i < half; i++) {
+                this.bubbles[i].velocity = 1;
+            }
         }
     }
 
@@ -456,12 +461,19 @@ class Field {
 
     /**
      * 
-     * @param {number} count 
-     * @param {number} radius
+     * @param {number|string} count 
+     * @param {number|string} radius
      * @param {string|Array} color
      */
     placeBubbles(count, radius, color) {
-        let i = 0, RGBcolor; 
+        let i = 0, RGBcolor = null;
+
+        count = Number(count);
+        if (isNaN(count)) throw new TypeError("Invalid value passed to the count parameter");
+        
+        radius = Number(radius);
+        if (isNaN(radius)) throw new TypeError("Invalid value passed to the radius parameter");
+        
 
         if (typeof color === 'string') {
             RGBcolor = PRESET_COLORS[color.toUpperCase()];

@@ -8,18 +8,21 @@
 }
 
 .test-document {
+    background-color: black;
     font-family: mr_VlaShu;
     .content-block {
-        height: 404px;
+        height: 510px;
         width: 100%;
         position: relative;
         .content {
+            color: white;
             z-index: 1;
             position: fixed;
-            width: 1000px;
-            font-size: 42px;
+           /*  width: 1000px; */
+            width: 100%;
+            font-size: 56px;
             display: table;
-            height: 400px;
+            height: 510px;
             .text-block {
                 vertical-align: middle;
                 display: table-cell;

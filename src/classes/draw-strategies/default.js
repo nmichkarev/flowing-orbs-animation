@@ -8,6 +8,7 @@ class DefaultDrawStrategy extends AbstractDrawStrategy {
         const { ctx, bubble } = this;
 
         ctx.lineWidth = 1;
+        ctx.strokeStyle = `rgb(${bubble.color.r}, ${bubble.color.g}, ${bubble.color.b})`;
 
         ctx.beginPath();
         ctx.arc(bubble.x, bubble.y, bubble.radius, 0, PI2);

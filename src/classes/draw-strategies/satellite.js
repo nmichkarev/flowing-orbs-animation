@@ -22,6 +22,8 @@ class SatelliteDrawStrategy extends AbstractDrawStrategy {
 
         DefaultDrawStrategy.prototype.draw.call(this);
         
+        ctx.fillStyle = `rgb(${bubble.color.r}, ${bubble.color.g}, ${bubble.color.b})`;
+        
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, PI2);
         ctx.fill();

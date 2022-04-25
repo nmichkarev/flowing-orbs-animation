@@ -24,7 +24,7 @@ module.exports = (env, argv) => {
         plugins: [
             new HTMLPlugin({ template: env.template ? './src/template.html' : './src/index.html' }),
             new MiniCssExtractPlugin({
-                filename: '[name].css',
+                filename: 'plugin.css',
             }),
         ],
         module: {
@@ -62,12 +62,15 @@ module.exports = (env, argv) => {
                     use: "file-loader"
                 }
             ]
-        },
-        devtool: 'source-map',
+        }
     };
 
     if (argv.mode === 'production') {
         config.target = ['web', 'es5'];
+    }
+
+    if (argv.mode !== 'production') {
+        config.devtool = 'source-map';
     }
 
     return config;
